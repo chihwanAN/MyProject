@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration 
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+	"HTTP://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 	이 부분에서 myBatis에 관련된 환경 설정을 한다. -->
+	<!-- 	기본 동작에 대한 환경 설정을 한다. 	-->
+	<settings>
+		<!-- 	캐쉬 메모리 사용 여부 -->
+		<setting name="cacheEnabled" value="false" />
+		<!-- 	일반화 키 사용 여부 -->
+		<setting name="useGeneratedKeys" value="true" />
+		<!-- 	기본 질의 실행 방식 -->
+		<setting name="defaultExecutorType" value="REUSE" />
+		 <setting name="lazyLoadingEnabled" value="false" />	
+	</settings>	
+	<typeAliases>
+		<!-- 	데이터가 숫자인 경우(int)라도
+				myBatis에서는 	java.lang.Integer	라고 사용해야 한다. 
+		-->
+		<typeAlias alias="int" type="java.lang.Integer" />
+		<typeAlias alias="String" type="java.lang.String" />
+		<!-- 	myBatis가 버전업이 되면서 기본적으로 사용되는
+				map과 list는 내부적으로 alias 선언을 해 놓았다.
+				다시 하면 중복 되므로 에러가 발생했다.
+				
+				이 부분에 resultType이나 parameterType에 사용할
+				데이터 형태의 별칭을 부여하는 부분이다.
+				
+				java.util.HashMap 이 너무 길어서 싫으면.....
+		-->
+		<typeAlias alias="imap" 		type="java.util.HashMap" />
+	</typeAliases>	
+	<mappers>
+		<mapper resource="/com/modu/sql/MemberSQL.xml" />
+	</mappers>
+</configuration>	
+	

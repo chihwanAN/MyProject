@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx 
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+         http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<context:annotation-config />
+	<!-- 	컨넥션 풀을 잡는다. -->
+	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl" />
+		<property name="username" value="scott" />
+		<property name="password" value="tiger" />
+	</bean>   
+	
+	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+		<constructor-arg ref="dataSourceSpied" />
+        <property name="logFormatter">
+            <bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+                <property name="loggingType" value="MULTI_LINE" />
+                <property name="sqlPrefix" value="SQL         :  "/>
+            </bean>
+        </property>
+	</bean>   
+	<!-- 	myBatis가 컨넥션 풀에 있는 컨넥션을 가지고 올 수 있는
+			클래스를 bean 등록한다.
+			SqlSessionFactoryBean 라는 클래스이다.
+	-->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!--	myBatis의 환경 설정 파일을 등록한다.	-->
+		<property name="configLocation" >
+			<!-- 	파일을 만들 위치와 파일 이름은 사용자 결정에 따른다. -->
+			<value>classpath:/com/modu/myBatis/myBatis-config.xml</value>
+		</property>
+		<property name="dataSource" ref="dataSource" />
+	</bean>      
+	<!-- 	myBatis에서 사용할 컨넥션 클래스를 bean 선언한다.
+			우리는 일반적으로 컨넥션을 Connection 이라는 클래스를
+			이용해서 처리했지만....
+			myBatis는 이 역활을 할 클래스의 이름을 SqlSessionTemplate으로
+			제공하고 있다.
+			
+			그래서 myBatis에서는 "컨넥션을 잡는다" 라는 표현을 쓰지 않고
+			"세션을 잡는다" 라는 표현으로 대신한다.
+	-->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>	
+	<!-- 	DAO 등록 부분-->
+	<bean id="memberImpl" class="com.modu.dao.MemberDAO">
+	 	<property name="sqlSessionTemplate" ref="sqlSession" />
+	</bean>
+	<!-- 	서비스 클래스 등록 부분 -->
+	<bean id="memberService" 		class="com.modu.service.MemberService" />
+</beans>

@@ -1,0 +1,121 @@
+@CHARSET "EUC-KR";
+html,body{
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing:border-box;
+}
+.index-container {
+	width: 1280px;
+	max-width: 1500px;
+	height: 100%;
+	margin: 0px auto;
+}
+.left-box {
+  background-image: url('../img/intro_img/twice.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  float: left;
+  width: 50%;
+  height: 100%;
+  position:relative;
+  text-align:center;
+}
+
+.left-box .p-size{
+  margin-top: 10%;
+}
+.right-box {
+  float: right;
+  height: 100%;
+  width: 50%;
+  
+}
+
+.bg01-box {
+	background: white;
+	width: 50%;
+	height: 33.3%;
+	float: left;
+}
+.bg02-box {
+	background-image: url('../img/intro_img/twice1.gif');
+	background-size: 100% 100%;
+	width: 50%;
+	height: 33.3%;
+	float: left;
+}
+.bg03-box {
+	background: white;
+	width: 50%;
+	height: 33.4%;
+	float: left;
+}
+.bg01{
+	background-image: url('../img/intro_img/twice2.gif');
+	background-size: 100% 100%;
+	width: 50%;
+	height: 33.3%;
+	float: right;
+}
+.bg02 {
+	background: white;
+	width: 50%;
+	height: 33.3%;
+	float: right;
+}
+.bg03 {
+	background-image: url('../img/intro_img/twice3.gif');
+	background-size: 100% 100%;
+	width: 50%;
+	height: 33.4%;
+	float: right;
+}
+.bg01-box a {
+	display:block;
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	padding-top: 30%;
+}
+.bg01-box a:link, .bg01-box a:visited, .bg01-box a:active {
+	text-decoration:none; color:#646464;
+}
+.bg01-box:hover {
+	background:#fed53e;color:#000;
+}
+.bg01-text {
+	font-size: 50px;
+}
+.bg02 a {
+	display:block;
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	padding-top: 30%;
+}
+.bg02 a:link, .bg02 a:visited, .bg02 a:active {
+	text-decoration:none; color:#646464;
+}
+.bg02:hover {
+	background:#fed53e;color:#000;
+}
+.bg02-text {
+	font-size: 50px;
+}
+.bg03-box a {
+	display:block;
+	text-align: center;
+	width: 100%;
+	height: 65%;
+	padding-top: 30%;
+}
+.bg03-box a:link, .bg03-box a:visited, .bg03-box a:active {
+	text-decoration:none; color:#646464;
+}
+.bg03-box:hover {
+	background:#fed53e;color:#000;
+}
+.bg03-text {
+	font-size: 50px;
+}
